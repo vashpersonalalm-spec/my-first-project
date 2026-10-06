@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ваш персонал — агентство домашнего персонала в Алматы</title>
+<meta name="description" content="Подбор нянь, домработниц, поваров, сиделок, водителей, садовников и семейных пар в Алматы. Оплата после выхода сотрудника, гарантия, экспресс-подбор за 1–2 дня.">
+<link rel="icon" href="logo-main.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --surface-2: #f1f3f6;
+    --text: #1f2937;
+    --heading: #0f172a;
+    --muted: #64748b;
+    --border: #e6e8ec;
+    --blue: #3b82f6;
+    --violet: #8b5cf6;
+    --green: #10b981;
+    --whatsapp: #25D366;
+    --whatsapp-dark: #1da851;
+    --grad: linear-gradient(90deg, var(--blue), var(--violet), var(--green));
+    --grad-candidate: linear-gradient(135deg, var(--blue), var(--violet));
+    --grad-client: linear-gradient(135deg, var(--violet), var(--green));
+    --radius: 1.25rem;
+    --shadow: 0 18px 40px rgba(15,23,42,0.07);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeUp 0.6s ease both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .btn-wa { background: var(--whatsapp); color: #fff; box-shadow: 0 8px 20px rgba(37,211,102,0.3); }
+  .btn-wa:hover { background: var(--whatsapp-dark); }
+  .btn-candidate { background: var(--grad-candidate); color: #fff; box-shadow: 0 10px 24px rgba(59,130,246,0.3); }
+  .btn-client { background: var(--grad-client); color: #fff; box-shadow: 0 10px 24px rgba(16,185,129,0.28); }
+  .btn-ghost { background: var(--surface); color: var(--heading); border: 1px solid var(--border); }
+  .btn-sm { padding: 10px 18px; font-size: 0.85rem; }
+
+  /* ===== Header ===== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 20px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .logo-row img { width: 40px; height: 40px; object-fit: contain; }
+  .logo-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .nav-links a { text-decoration: none; color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--heading); }
+
+  @media (max-width: 860px) { .nav-links { display: none; } }
+  @media (max-width: 400px) { .header-wa span { display: none; } .header-wa { padding: 10px 12px; } }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    padding: 56px 0 40px;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 12% 15%, rgba(59,130,246,0.13), transparent 40%),
+      radial-gradient(circle at 88% 10%, rgba(139,92,246,0.13), transparent 40%),
+      radial-gradient(circle at 50% 100%, rgba(16,185,129,0.10), transparent 45%);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+
+  .hero-head { text-align: center; max-width: 760px; margin: 0 auto 36px; }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.9rem, 4.6vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--heading);
+    margin: 18px 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .hero-title em {
+    font-style: italic;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 1.02rem;
+    margin: 0;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+
+  .side-card {
+    position: relative;
+    background: var(--surface);
+    border-radius: 1.5rem;
+    border: 1px solid var(--border);
+    padding: 30px 26px 26px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .side-card:hover { transform: translateY(-4px); box-shadow: 0 26px 50px rgba(15,23,42,0.11); }
+  .side-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .side-card.client::before { background: var(--grad-client); }
+  .side-card.candidate::before { background: var(--grad-candidate); }
+
+  .side-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .side-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    flex-shrink: 0;
+  }
+  .side-card.client .side-icon { background: var(--grad-client); }
+  .side-card.candidate .side-icon { background: var(--grad-candidate); }
+
+  .side-card h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.45rem;
+    margin: 0;
+    color: var(--heading);
+    line-height: 1.2;
+  }
+  .side-card .side-tag { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+
+  .side-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+    display: grid;
+    gap: 8px;
+    font-size: 0.92rem;
+  }
+  .side-list li { display: flex; gap: 10px; align-items: flex-start; }
+  .side-list li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    border-radius: 50%;
+    background: var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 12px no-repeat;
+  }
+  .side-card .btn { margin-top: auto; width: 100%; }
+  .side-alt { margin-top: 12px; text-align: center; font-size: 0.86rem; color: var(--muted); }
+  .side-alt a { color: var(--heading); font-weight: 700; text-decoration-color: var(--border); text-underline-offset: 3px; }
+  .side-alt a:hover { color: var(--violet); }
+
+  .trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 22px;
+    margin-top: 30px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .trust-row span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ===== Sections ===== */
+  section { padding: 56px 0; scroll-margin-top: 70px; }
+  .section-alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 32px; }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+    font-weight: 600;
+    color: var(--heading);
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+  .section-sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+  /* ===== Services grid ===== */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+  }
+  .service {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .service:hover { transform: translateY(-3px); border-color: var(--violet); background: var(--surface); }
+  .service-icon { font-size: 1.6rem; line-height: 1; margin-bottom: 4px; }
+  .service h3 { margin: 0; font-size: 1.02rem; color: var(--heading); }
+  .service p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+  .service .service-link { margin-top: auto; padding-top: 8px; font-size: 0.82rem; font-weight: 700; color: var(--violet); }
+  .service.express { background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(16,185,129,0.10)); border-color: rgba(16,185,129,0.4); }
+
+  /* ===== Express banner ===== */
+  .express-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 28px 30px;
+    border-radius: 1.5rem;
+    background: var(--heading);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .express-banner::after {
+    content: "";
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.45), transparent 70%);
+    pointer-events: none;
+  }
+  .express-banner h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; margin: 0 0 4px; }
+  .express-banner p { margin: 0; color: #cbd5e1; font-size: 0.92rem; max-width: 520px; }
+  .express-banner .btn { position: relative; z-index: 1; }
+
+  /* ===== Tabs (shared) ===== */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 auto 26px;
+    padding: 5px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    width: fit-content;
+    max-width: 100%;
+  }
+  .tab {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    color: var(--muted);
+    transition: background 0.2s, color 0.2s;
+  }
+  .tab.active { background: var(--surface); color: var(--heading); box-shadow: 0 2px 8px rgba(15,23,42,0.08); }
+  .section-alt .tabs { background: var(--bg); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeUp 0.35s ease both; }
+
+  /* ===== Steps ===== */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    counter-reset: step;
+  }
+  @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    counter-increment: step;
+  }
+  .step::before {
+    content: counter(step);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--grad-candidate);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  [data-panel="client"] .step::before { background: var(--grad-client); }
+  .step h3 { margin: 0 0 4px; font-size: 1rem; color: var(--heading); }
+  .step p { margin: 0; font-size: 0.86rem; color: var(--muted); }
+
+  /* ===== Conditions ===== */
+  .terms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 760px) { .terms { grid-template-columns: 1fr; } }
+
+  .term-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    padding: 28px 26px;
+  }
+  .term-card .term-label {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .term-big {
+    font-family: 'Fraunces', serif;
+    font-size: 2.6rem;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0 0 6px;
+  }
+  .term-card.client .term-big { background: var(--grad-client); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .term-card.candidate .term-big { background: var(--grad-candidate); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .term-card .term-big-sub { color: var(--muted); font-size: 0.9rem; margin: 0 0 18px; }
+  .term-card .side-list { margin: 0; }
+
+  /* ===== FAQ ===== */
+  .faq-list { max-width: 780px; margin: 0 auto; }
+
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 17px 20px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--heading);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+  .faq-question .chevron {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, background 0.2s;
+  }
+  .faq-question .chevron svg { width: 14px; height: 14px; }
+  .faq-item.open .chevron { transform: rotate(180deg); background: rgba(139,92,246,0.12); }
+
+  .faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+  }
+  .faq-item.open .faq-answer { grid-template-rows: 1fr; }
+  .faq-answer > div { overflow: hidden; }
+  .faq-answer p { margin: 0; padding: 0 20px 18px; color: var(--muted); font-size: 0.9rem; }
+
+  .faq-more { text-align: center; margin-top: 22px; color: var(--muted); font-size: 0.92rem; }
+  .faq-more a { color: var(--violet); font-weight: 700; }
+
+  /* ===== Contacts ===== */
+  .contacts {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 760px) { .contacts { grid-template-columns: 1fr; } }
+
+  .contact-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    padding: 26px;
+  }
+  .contact-row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row .ci { font-size: 1.2rem; width: 28px; text-align: center; flex-shrink: 0; }
+  .contact-row .cl { font-size: 0.78rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .contact-row .cv { font-weight: 700; color: var(--heading); text-decoration: none; }
+  .contact-row a.cv:hover { color: var(--violet); }
+
+  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  .social-grid a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--heading);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .social-grid a:hover { transform: translateY(-2px); border-color: var(--violet); }
+  .contact-card h3 { margin: 0 0 14px; font-size: 1.05rem; color: var(--heading); }
+
+  /* ===== Footer ===== */
+  footer {
+    padding: 28px 0 90px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  @media (min-width: 701px) { footer { padding-bottom: 28px; } }
+
+  /* ===== Floating WhatsApp (mobile) ===== */
+  .wa-float {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 40;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--whatsapp);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 26px rgba(37,211,102,0.45);
+    transition: transform 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.06); }
+  .wa-float svg { width: 30px; height: 30px; }
+
+  /* ===== Role picker dialog ===== */
+  dialog {
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0;
+    width: min(520px, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    box-shadow: 0 30px 80px rgba(15,23,42,0.3);
+    color: var(--text);
+  }
+  dialog::backdrop { background: rgba(15,23,42,0.45); backdrop-filter: blur(3px); }
+  .dlg-head { padding: 24px 24px 8px; position: relative; }
+  .dlg-head h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; margin: 0 0 4px; color: var(--heading); }
+  .dlg-head p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+  .dlg-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--surface-2);
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 16px 24px 24px;
+  }
+  @media (max-width: 380px) { .role-grid { grid-template-columns: 1fr; } }
+  .role-grid a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 14px;
+    border-radius: 0.9rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--heading);
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  .role-grid a:hover { border-color: var(--whatsapp); background: #f0fdf4; transform: translateY(-1px); }
+  .role-grid a span { font-size: 1.2rem; }
+  .dlg-note { padding: 0 24px 22px; margin-top: -8px; font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.46 9.46 0 0 1-4.82-1.32l-.35-.2-3.58.93.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47a9.4 9.4 0 0 1 6.7 2.78 9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46m8.06-17.53A11.32 11.32 0 0 0 12.05.63C5.78.63.67 5.73.67 12c0 2 .52 3.97 1.52 5.7L.57 23.62l6.05-1.59a11.4 11.4 0 0 0 5.43 1.38h.01c6.27 0 11.38-5.1 11.38-11.38 0-3.04-1.18-5.9-3.33-8.05"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header>
+  <div class="header-inner">
+    <a class="logo-row" href="#top">
+      <img src="logo-main.png" alt="">
+      <span class="logo-text">Ваш персонал</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Услуги</a>
+      <a href="#how">Как мы работаем</a>
+      <a href="#terms">Условия</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="btn btn-wa btn-sm header-wa" href="https://wa.me/77072259373" target="_blank" rel="noopener">
+      <svg><use href="#i-wa"/></svg><span>WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-head">
+        <span class="eyebrow fade-in"><span class="dot"></span>Агентство домашнего персонала · Алматы</span>
+        <h1 class="hero-title fade-in" style="animation-delay:0.05s">Надёжный персонал <em>для вашего дома</em></h1>
+        <p class="hero-sub fade-in" style="animation-delay:0.1s">Няни, домработницы, повара, сиделки, водители, садовники и семейные пары. Выберите, кто вы, — и продолжим в WhatsApp.</p>
+      </div>
+
+      <div class="split">
+        <div class="side-card client fade-in" style="animation-delay:0.15s">
+          <div class="side-top">
+            <div class="side-icon">🏠</div>
+            <div>
+              <h2>Нужен персонал</h2>
+              <div class="side-tag">Для семей и заказчиков</div>
+            </div>
+          </div>
+          <ul class="side-list">
+            <li>Проверенные кандидаты с рекомендациями</li>
+            <li>Оплата только после выхода сотрудника</li>
+            <li>Гарантия замены 2–3 месяца</li>
+          </ul>
+          <button class="btn btn-client" data-open-picker="client">Подобрать персонал →</button>
+          <div class="side-alt">или <a href="https://docs.google.com/forms/d/e/1FAIpQLSdwDckP-xsL_9jh3lOQEJao-Swxwzu8Vjlnh79QAu7zszUtGA/viewform" target="_blank" rel="noopener">заполните заявку онлайн</a></div>
+        </div>
+
+        <div class="side-card candidate fade-in" style="animation-delay:0.22s">
+          <div class="side-top">
+            <div class="side-icon">🙋‍♀️</div>
+            <div>
+              <h2>Ищу работу</h2>
+              <div class="side-tag">Для соискателей</div>
+            </div>
+          </div>
+          <ul class="side-list">
+            <li>Регистрация в базе бесплатная</li>
+            <li>Вакансии в семьях Алматы</li>
+            <li>Комиссия только после первой зарплаты</li>
+          </ul>
+          <button class="btn btn-candidate" data-open-picker="candidate">Устроиться на работу →</button>
+          <div class="side-alt">или позвоните <a href="tel:+77072259373">+7 707 225 93 73</a></div>
+        </div>
+      </div>
+
+      <div class="trust-row fade-in" style="animation-delay:0.3s">
+        <span>⚡ Экспресс-подбор за 1–2 дня</span>
+        <span>🛡️ Проверка документов и рекомендаций</span>
+        <span>🤝 Знакомство через агентство</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section id="services" class="section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Кого мы подбираем</h2>
+        <p class="section-sub">Нажмите на профессию — откроется WhatsApp с готовой заявкой</p>
+      </div>
+      <div class="services" id="services-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Express ===== -->
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <div class="express-banner">
+        <div>
+          <h3>⚡ Нужно срочно?</h3>
+          <p>Экспресс-подбор: готовые анкеты кандидатов за 1–2 дня, а иногда — в день обращения. Подходит и для разовых выходов.</p>
+        </div>
+        <a class="btn btn-wa" id="express-link" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Срочная заявка</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== How we work ===== -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Как мы работаем</h2>
+        <p class="section-sub">Четыре простых шага — без лишней бюрократии</p>
+      </div>
+
+      <div class="tabs" role="tablist" data-tabs="how">
+        <button class="tab active" data-tab="client">Заказчикам</button>
+        <button class="tab" data-tab="candidate">Соискателям</button>
+      </div>
+
+      <div class="tab-panel active" data-tabs="how" data-panel="client">
+        <div class="steps">
+          <div class="step"><h3>Заявка</h3><p>Пишете в WhatsApp или <a href="https://docs.google.com/forms/d/e/1FAIpQLSdwDckP-xsL_9jh3lOQEJao-Swxwzu8Vjlnh79QAu7zszUtGA/viewform" target="_blank" rel="noopener">заполняете заявку онлайн</a> — за 5–7 минут.</p></div>
+          <div class="step"><h3>Подбор</h3><p>Отбираем кандидатов из базы, проводим собеседования, проверяем документы и рекомендации.</p></div>
+          <div class="step"><h3>Знакомство</h3><p>Присылаем анкеты подходящих кандидатов и организуем встречу через агентство.</p></div>
+          <div class="step"><h3>Выход и гарантия</h3><p>Сотрудник выходит на работу, вы оплачиваете услугу — и действует гарантия замены.</p></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tabs="how" data-panel="candidate">
+        <div class="steps">
+          <div class="step"><h3>Заявка</h3><p>Пишете в WhatsApp, выбираете специальность и получаете ссылку на анкету.</p></div>
+          <div class="step"><h3>Анкета</h3><p>Заполняете анкету о своём опыте, графике и пожеланиях по зарплате.</p></div>
+          <div class="step"><h3>Собеседование</h3><p>Менеджер проводит собеседование и сверяет документы. После этого вы в базе.</p></div>
+          <div class="step"><h3>Работа</h3><p>Предлагаем подходящие вакансии и знакомим с семьёй. Комиссия — после первой зарплаты.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Terms ===== -->
+  <section id="terms" class="section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Прозрачные условия</h2>
+        <p class="section-sub">Никаких предоплат и скрытых платежей</p>
+      </div>
+      <div class="terms">
+        <div class="term-card client">
+          <span class="term-label">Заказчикам</span>
+          <p class="term-big">80%</p>
+          <p class="term-big-sub">от одного месячного оклада сотрудника</p>
+          <ul class="side-list">
+            <li>Оплата — после фактического выхода сотрудника на работу</li>
+            <li>Гарантия 2–3 месяца в зависимости от суммы заявки</li>
+            <li>Отбор, собеседования, проверка документов и рекомендаций</li>
+            <li>Знакомство с кандидатами организуем через агентство</li>
+          </ul>
+        </div>
+        <div class="term-card candidate">
+          <span class="term-label">Соискателям</span>
+          <p class="term-big">0 ₸</p>
+          <p class="term-big-sub">регистрация в базе — бесплатно</p>
+          <ul class="side-list">
+            <li>Комиссия 15% от одного месячного оклада — только при успешном трудоустройстве</li>
+            <li>Оплата после получения первой зарплаты</li>
+            <li>Вакансии с проживанием и без, полный и частичный график</li>
+            <li>Ваши данные используются только для подбора работы</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Частые вопросы</h2>
+      </div>
+
+      <div class="tabs" role="tablist" data-tabs="faq">
+        <button class="tab active" data-tab="client">Заказчикам</button>
+        <button class="tab" data-tab="candidate">Соискателям</button>
+      </div>
+
+      <div class="tab-panel active" data-tabs="faq" data-panel="client">
+        <div class="faq-list">
+          <div class="faq-item"><button class="faq-question">Сколько стоят ваши услуги?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>80% от одного месячного оклада выбранного сотрудника. Предоплаты нет — оплата после того, как сотрудник фактически вышел на работу.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Сколько длится подбор?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Зависит от требований вакансии и наличия кандидатов. По срочным заявкам работает экспресс-подбор: готовые анкеты за 1–2 дня, иногда в день обращения.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Какая гарантия?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>2–3 месяца в зависимости от суммы заявки. Если в этот период сотрудник вам не подошёл — сообщите менеджеру, и мы подберём замену.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Как вы проверяете кандидатов?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Личное собеседование с менеджером, проверка удостоверения личности, справки о несудимости, при необходимости — медицинских документов, а также звонки по рекомендациям с прошлых мест работы.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Можно сразу получить контакты кандидата?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Нет — мы присылаем анкеты кандидатов, а первое знакомство организуем через агентство. Так мы защищаем и вас, и сотрудника.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Подбираете персонал с проживанием?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Да. Подбираем сотрудников с проживанием и без, на полный и частичный график, а также на вахту.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Можно заказать разовый выход?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Да — например, няню на день, уборку после ремонта или разовый выход садовника. Напишите нам с пометкой «срочно».</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Чем агентство лучше поиска по объявлениям?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Мы берём на себя отбор, собеседования, проверку документов и рекомендаций, организацию знакомства — и даём гарантию. При самостоятельном поиске всё это ложится на вас.</p></div></div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tabs="faq" data-panel="candidate">
+        <div class="faq-list">
+          <div class="faq-item"><button class="faq-question">Регистрация платная?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Нет, регистрация в базе полностью бесплатная.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Какая комиссия при трудоустройстве?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>15% от одного месячного оклада. Оплачивается только при успешном трудоустройстве, после получения первой зарплаты.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Как попасть в базу?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Напишите нам в WhatsApp и выберите специальность — пришлём ссылку на анкету. После анкеты менеджер пригласит на собеседование.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Какие документы нужны?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Удостоверение личности, справка о несудимости и, в зависимости от вакансии, медицинские документы. Точный список уточнит менеджер.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Какие вакансии у вас есть?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Няни, гувернантки, домработницы, повара, сиделки, водители, садовники, гардеробщицы и семейные пары — в семьях Алматы, с проживанием и без.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Можно общаться на казахском?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Да, пишите или отправляйте голосовые на русском или казахском — как вам удобнее.</p></div></div></div>
+        </div>
+      </div>
+
+      <p class="faq-more">Не нашли ответ? <a href="https://wa.me/77072259373" target="_blank" rel="noopener">Спросите нас в WhatsApp</a></p>
+    </div>
+  </section>
+
+  <!-- ===== Contacts ===== -->
+  <section id="contacts" class="section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Контакты</h2>
+      </div>
+      <div class="contacts">
+        <div class="contact-card">
+          <div class="contact-row"><span class="ci">📞</span><div><div class="cl">Телефон / WhatsApp</div><a class="cv" href="tel:+77072259373">+7 707 225 93 73</a></div></div>
+          <div class="contact-row"><span class="ci">📍</span><div><div class="cl">Офис</div><a class="cv" href="https://2gis.kz/almaty/search/%D0%93%D0%BE%D0%B3%D0%BE%D0%BB%D1%8F%2039%D0%B0" target="_blank" rel="noopener">Алматы, ул. Гоголя 39а, офис 316</a></div></div>
+          <div class="contact-row"><span class="ci">🕘</span><div><div class="cl">Режим работы</div><div class="cv">Пн–Пт, 9:00–18:00</div></div></div>
+          <div class="contact-row"><span class="ci">✉️</span><div><div class="cl">Email</div><a class="cv" href="mailto:vashpersonal.alm@gmail.com">vashpersonal.alm@gmail.com</a></div></div>
+        </div>
+        <div class="contact-card">
+          <h3>Мы в мессенджерах</h3>
+          <div class="social-grid">
+            <a href="https://wa.me/77072259373" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a href="https://t.me/vashpersonal_alm" target="_blank" rel="noopener">✈️ Telegram</a>
+            <a href="https://instagram.com/vash.personal.alm" target="_blank" rel="noopener">📸 Instagram</a>
+            <a href="mailto:vashpersonal.alm@gmail.com">✉️ Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Кадровое агентство «Ваш персонал», Алматы</div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/77072259373" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"><svg><use href="#i-wa"/></svg></a>
+
+<!-- ===== Role picker ===== -->
+<dialog id="picker">
+  <div class="dlg-head">
+    <h3 id="picker-title"></h3>
+    <p id="picker-sub"></p>
+    <button class="dlg-close" aria-label="Закрыть" data-close>×</button>
+  </div>
+  <div class="role-grid" id="picker-grid"></div>
+  <div class="dlg-note"><svg width="14" height="14" style="color:var(--whatsapp)"><use href="#i-wa"/></svg>Откроется WhatsApp с готовым сообщением</div>
+</dialog>
+
+<script>
+  const WA = '77072259373';
+
+  // Единый список профессий: сайт и AI-агент опираются на одни и те же названия
+  const ROLES = [
+    { key: 'Няня',              icon: '👶', desc: 'Уход за детьми от рождения до школы, прогулки, развитие' },
+    { key: 'Гувернантка',       icon: '📚', desc: 'Воспитание, обучение, подготовка к школе, языки' },
+    { key: 'Домработница',      icon: '🧺', desc: 'Уборка, стирка, глажка, уход за гардеробом' },
+    { key: 'Повар',             icon: '🍲', desc: 'Домашняя, детская, диетическая кухня, меню на неделю' },
+    { key: 'Сиделка',           icon: '🤲', desc: 'Уход за пожилыми и лежачими, патронаж' },
+    { key: 'Водитель',          icon: '🚗', desc: 'Семейный и персональный водитель, сопровождение детей' },
+    { key: 'Садовник',          icon: '🌿', desc: 'Уход за садом, газоном и участком' },
+    { key: 'Гардеробщица',      icon: '👗', desc: 'Уход за одеждой, деликатная стирка, сезонная смена' },
+    { key: 'Семейная пара',     icon: '👫', desc: 'Ведение дома и участка, с проживанием' },
+  ];
+
+  const waLink = text => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
+  const clientText = role => 'Здравствуйте! Ищу персонал: ' + role.toLowerCase();
+  const candidateText = role => 'Здравствуйте! Ищу работу: ' + role.toLowerCase();
+
+  // Карточки услуг
+  const grid = document.getElementById('services-grid');
+  ROLES.forEach(r => {
+    const a = document.createElement('a');
+    a.className = 'service';
+    a.href = waLink(clientText(r.key));
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = '<span class="service-icon">' + r.icon + '</span><h3>' + r.key + '</h3><p>' + r.desc + '</p><span class="service-link">Оставить заявку →</span>';
+    grid.appendChild(a);
+  });
+  const express = document.createElement('a');
+  express.className = 'service express';
+  express.href = waLink('Здравствуйте! Нужен экспресс-подбор (срочно)');
+  express.target = '_blank';
+  express.rel = 'noopener';
+  express.innerHTML = '<span class="service-icon">⚡</span><h3>Экспресс-персонал</h3><p>Срочный подбор за 1–2 дня и разовые выходы</p><span class="service-link">Срочная заявка →</span>';
+  grid.appendChild(express);
+  document.getElementById('express-link').href = express.href;
+
+  // Окно выбора профессии
+  const dlg = document.getElementById('picker');
+  const pickerGrid = document.getElementById('picker-grid');
+  const PICKER = {
+    client:    { title: 'Кто вам нужен?', sub: 'Выберите профессию — мы сразу перейдём к сути', text: clientText,
+                 extra: { key: 'Срочно / разово', icon: '⚡', text: 'Здравствуйте! Нужен экспресс-подбор (срочно)' },
+                 other: 'Здравствуйте! Ищу персонал для дома' },
+    candidate: { title: 'Какую работу ищете?', sub: 'Выберите специальность — пришлём анкету', text: candidateText,
+                 other: 'Здравствуйте! Ищу работу' },
+  };
+
+  function openPicker(type) {
+    const cfg = PICKER[type];
+    document.getElementById('picker-title').textContent = cfg.title;
+    document.getElementById('picker-sub').textContent = cfg.sub;
+    pickerGrid.innerHTML = '';
+    const add = (icon, label, text) => {
+      const a = document.createElement('a');
+      a.href = waLink(text);
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.innerHTML = '<span>' + icon + '</span>' + label;
+      a.addEventListener('click', () => dlg.close());
+      pickerGrid.appendChild(a);
+    };
+    ROLES.forEach(r => add(r.icon, r.key, cfg.text(r.key)));
+    if (cfg.extra) add(cfg.extra.icon, cfg.extra.key, cfg.extra.text);
+    add('💬', 'Другое', cfg.other);
+    dlg.showModal();
+  }
+
+  document.querySelectorAll('[data-open-picker]').forEach(btn =>
+    btn.addEventListener('click', () => openPicker(btn.dataset.openPicker)));
+  dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+  // Вкладки
+  document.querySelectorAll('.tabs').forEach(tabs => {
+    const group = tabs.dataset.tabs;
+    tabs.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === tab));
+        document.querySelectorAll('.tab-panel[data-tabs="' + group + '"]').forEach(p =>
+          p.classList.toggle('active', p.dataset.panel === tab.dataset.tab));
+      });
+    });
+  });
+
+  // FAQ
+  document.querySelectorAll('.faq-question').forEach(btn =>
+    btn.addEventListener('click', () => btn.closest('.faq-item').classList.toggle('open')));
+</script>
+
+</body>
+</html>
