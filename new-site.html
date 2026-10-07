@@ -133,14 +133,59 @@
   }
   .nav-links a { text-decoration: none; color: var(--muted); transition: color 0.2s; }
   .nav-links a:hover { color: var(--heading); }
+  .nav-links { align-items: center; }
+  /* «Контакты» в шапке: выделены цветной рамкой рядом с WhatsApp */
+  .nav-links a.nav-contacts {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--grad) border-box;
+    color: var(--violet);
+    font-weight: 800;
+    box-shadow: 0 4px 14px rgba(139,92,246,0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .nav-links a.nav-contacts:hover { color: var(--violet); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(139,92,246,0.28); }
 
   @media (max-width: 860px) { .nav-links { display: none; } }
   @media (max-width: 400px) { .header-wa span { display: none; } .header-wa { padding: 10px 12px; } }
+  @media (max-width: 480px) { .logo-text { display: none; } }
+
+  /* ===== Кнопка «Услуги»: ведёт к блоку «Кого мы подбираем» ===== */
+  .services-wrap { margin-right: auto; }
+  .services-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 999px;
+    background: var(--grad);
+    color: #fff;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(139,92,246,0.35);
+    animation: servicesGlow 2.6s ease-in-out infinite;
+    transition: transform 0.2s ease;
+  }
+  .services-btn:hover { transform: translateY(-1px); }
+  .services-btn svg { width: 16px; height: 16px; animation: servicesArrow 1.6s ease-in-out infinite; }
+  @keyframes servicesArrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+  }
+  @keyframes servicesGlow {
+    0%, 100% { box-shadow: 0 6px 18px rgba(139,92,246,0.35); }
+    50% { box-shadow: 0 6px 26px rgba(139,92,246,0.6), 0 0 0 4px rgba(139,92,246,0.12); }
+  }
 
   /* ===== Hero ===== */
   .hero {
     position: relative;
-    padding: 56px 0 40px;
+    padding: 16px 0 28px;
   }
   .hero::before {
     content: "";
@@ -167,16 +212,29 @@
   }
   .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
 
-  .hero-head { text-align: center; max-width: 760px; margin: 0 auto 36px; }
+  /* Компактный главный блок: аватарки персонала + заголовок в одну строку */
+  .hero-compact {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: 900px;
+    margin: 0 auto 18px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.1rem;
+    box-shadow: var(--shadow);
+  }
+  .hero-avatars { height: 64px; width: auto; flex-shrink: 0; }
+  .hero-compact-text { text-align: left; min-width: 0; }
 
   .hero-title {
     font-family: 'Fraunces', serif;
-    font-size: clamp(1.9rem, 4.6vw, 3rem);
+    font-size: clamp(1.05rem, 2.4vw, 1.55rem);
     font-weight: 600;
     line-height: 1.15;
     color: var(--heading);
-    margin: 18px 0 14px;
-    letter-spacing: -0.01em;
+    margin: 0 0 3px;
   }
   .hero-title em {
     font-style: italic;
@@ -185,11 +243,17 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
   .hero-sub {
     color: var(--muted);
-    font-size: 1.02rem;
+    font-weight: 600;
+    font-size: clamp(0.72rem, 1.5vw, 0.88rem);
     margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero-compact { flex-direction: column; gap: 8px; padding: 10px 14px; }
+    .hero-avatars { height: 44px; }
+    .hero-compact-text { text-align: center; }
   }
 
   .split {
@@ -508,36 +572,72 @@
   }
   @media (max-width: 760px) { .contacts { grid-template-columns: 1fr; } }
 
+  /* Карточка с цветной рамкой в цветах логотипа */
   .contact-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
+    border: 2px solid transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--grad) border-box;
     border-radius: 1.5rem;
-    padding: 26px;
+    padding: 24px;
+    box-shadow: 0 18px 40px rgba(139,92,246,0.14);
   }
-  .contact-row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .contact-card h3 { margin: 0 0 14px; font-size: 1.1rem; color: var(--heading); }
+
+  .contact-phone { text-align: center; padding: 4px 0 18px; border-bottom: 1px solid var(--border); margin-bottom: 6px; }
+  .contact-phone .cl { justify-content: center; }
+  .contact-phone-number {
+    display: inline-block;
+    margin: 4px 0 14px;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 5vw, 2.1rem);
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .contact-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-call { background: var(--grad-candidate); color: #fff; box-shadow: 0 8px 20px rgba(59,130,246,0.3); }
+
+  .contact-row { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .contact-row:last-child { border-bottom: none; }
-  .contact-row .ci { font-size: 1.2rem; width: 28px; text-align: center; flex-shrink: 0; }
-  .contact-row .cl { font-size: 0.78rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .contact-row .cv { font-weight: 700; color: var(--heading); text-decoration: none; }
+  .contact-row .ci {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    background: var(--grad);
+    box-shadow: 0 6px 14px rgba(139,92,246,0.25);
+  }
+  .cl { display: flex; font-size: 0.75rem; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+  .contact-row .cv { font-weight: 800; font-size: 1.02rem; color: var(--heading); text-decoration: none; }
   .contact-row a.cv:hover { color: var(--violet); }
 
-  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  /* Мессенджеры в фирменных цветах */
+  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .social-grid a {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 14px 16px;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 14px;
     border-radius: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
     text-decoration: none;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--heading);
-    transition: transform 0.2s, border-color 0.2s;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(15,23,42,0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .social-grid a:hover { transform: translateY(-2px); border-color: var(--violet); }
-  .contact-card h3 { margin: 0 0 14px; font-size: 1.05rem; color: var(--heading); }
+  .social-grid a:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(15,23,42,0.18); }
+  .social-grid .s-wa { background: var(--whatsapp); }
+  .social-grid .s-tg { background: #229ED9; }
+  .social-grid .s-ig { background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af); }
+  .social-grid .s-mail { background: var(--grad-client); }
 
   /* ===== Footer ===== */
   footer {
@@ -632,32 +732,52 @@
       <img src="logo-main.png" alt="">
       <span class="logo-text">Ваш персонал</span>
     </a>
+    <div class="services-wrap">
+      <a class="services-btn" href="#services">Услуги <svg><use href="#i-chev"/></svg></a>
+    </div>
     <nav class="nav-links">
-      <a href="#services">Услуги</a>
       <a href="#how">Как мы работаем</a>
       <a href="#terms">Условия</a>
       <a href="#faq">Вопросы</a>
-      <a href="#contacts">Контакты</a>
+      <a class="nav-contacts" href="#contacts">📞 Контакты</a>
     </nav>
     <a class="btn btn-wa btn-sm header-wa" href="https://wa.me/77072259373" target="_blank" rel="noopener">
       <svg><use href="#i-wa"/></svg><span>WhatsApp</span>
     </a>
   </div>
 </header>
-
 <main id="top">
 
   <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="wrap">
-      <div class="hero-head">
-        <span class="eyebrow fade-in"><span class="dot"></span>Агентство домашнего персонала · Алматы</span>
-        <h1 class="hero-title fade-in" style="animation-delay:0.05s">Надёжный персонал <em>для вашего дома</em></h1>
-        <p class="hero-sub fade-in" style="animation-delay:0.1s">Няни, домработницы, повара, сиделки, водители, садовники и семейные пары. Выберите, кто вы, — и продолжим в WhatsApp.</p>
+      <div class="hero-compact fade-in">
+        <img class="hero-avatars" src="team-avatars.png" width="532" height="128"
+             alt="Повар, няня с ребёнком, сиделка, водитель и помощница по дому">
+        <div class="hero-compact-text">
+          <h1 class="hero-title">Агентство «Ваш персонал» <em>поможет найти</em></h1>
+          <p class="hero-sub">Повара · Няню · Сиделку · Личного водителя · Помощницу по дому</p>
+        </div>
       </div>
 
       <div class="split">
-        <div class="side-card client fade-in" style="animation-delay:0.15s">
+        <div class="side-card candidate fade-in" style="animation-delay:0.15s">
+          <div class="side-top">
+            <div class="side-icon">🙋‍♀️</div>
+            <div>
+              <h2>Ищу работу</h2>
+              <div class="side-tag">Для соискателей</div>
+            </div>
+          </div>
+          <ul class="side-list">
+            <li>Регистрация в базе бесплатная</li>
+            <li>Вакансии в семьях Алматы</li>
+            <li>Комиссия только после первой зарплаты</li>
+          </ul>
+          <button class="btn btn-candidate" data-open-picker="candidate">Устроиться на работу →</button>
+          <div class="side-alt">или позвоните <a href="tel:+77072259373">+7 707 225 93 73</a></div>
+        </div>
+        <div class="side-card client fade-in" style="animation-delay:0.22s">
           <div class="side-top">
             <div class="side-icon">🏠</div>
             <div>
@@ -674,22 +794,6 @@
           <div class="side-alt">или <a href="https://docs.google.com/forms/d/e/1FAIpQLSdwDckP-xsL_9jh3lOQEJao-Swxwzu8Vjlnh79QAu7zszUtGA/viewform" target="_blank" rel="noopener">заполните заявку онлайн</a></div>
         </div>
 
-        <div class="side-card candidate fade-in" style="animation-delay:0.22s">
-          <div class="side-top">
-            <div class="side-icon">🙋‍♀️</div>
-            <div>
-              <h2>Ищу работу</h2>
-              <div class="side-tag">Для соискателей</div>
-            </div>
-          </div>
-          <ul class="side-list">
-            <li>Регистрация в базе бесплатная</li>
-            <li>Вакансии в семьях Алматы</li>
-            <li>Комиссия только после первой зарплаты</li>
-          </ul>
-          <button class="btn btn-candidate" data-open-picker="candidate">Устроиться на работу →</button>
-          <div class="side-alt">или позвоните <a href="tel:+77072259373">+7 707 225 93 73</a></div>
-        </div>
       </div>
 
       <div class="trust-row fade-in" style="animation-delay:0.3s">
@@ -839,7 +943,14 @@
       </div>
       <div class="contacts">
         <div class="contact-card">
-          <div class="contact-row"><span class="ci">📞</span><div><div class="cl">Телефон / WhatsApp</div><a class="cv" href="tel:+77072259373">+7 707 225 93 73</a></div></div>
+          <div class="contact-phone">
+            <div class="cl">Телефон / WhatsApp</div>
+            <a class="contact-phone-number" href="tel:+77072259373">+7 707 225 93 73</a>
+            <div class="contact-actions">
+              <a class="btn btn-call btn-sm" href="tel:+77072259373">📞 Позвонить</a>
+              <a class="btn btn-wa btn-sm" href="https://wa.me/77072259373" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Написать в WhatsApp</a>
+            </div>
+          </div>
           <div class="contact-row"><span class="ci">📍</span><div><div class="cl">Офис</div><a class="cv" href="https://2gis.kz/almaty/search/%D0%93%D0%BE%D0%B3%D0%BE%D0%BB%D1%8F%2039%D0%B0" target="_blank" rel="noopener">Алматы, ул. Гоголя 39а, офис 316</a></div></div>
           <div class="contact-row"><span class="ci">🕘</span><div><div class="cl">Режим работы</div><div class="cv">Пн–Пт, 9:00–18:00</div></div></div>
           <div class="contact-row"><span class="ci">✉️</span><div><div class="cl">Email</div><a class="cv" href="mailto:vashpersonal.alm@gmail.com">vashpersonal.alm@gmail.com</a></div></div>
@@ -847,10 +958,10 @@
         <div class="contact-card">
           <h3>Мы в мессенджерах</h3>
           <div class="social-grid">
-            <a href="https://wa.me/77072259373" target="_blank" rel="noopener">💬 WhatsApp</a>
-            <a href="https://t.me/vashpersonal_alm" target="_blank" rel="noopener">✈️ Telegram</a>
-            <a href="https://instagram.com/vash.personal.alm" target="_blank" rel="noopener">📸 Instagram</a>
-            <a href="mailto:vashpersonal.alm@gmail.com">✉️ Email</a>
+            <a class="s-wa" href="https://wa.me/77072259373" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="s-tg" href="https://t.me/vashpersonal_alm" target="_blank" rel="noopener">✈️ Telegram</a>
+            <a class="s-ig" href="https://instagram.com/vash.personal.alm" target="_blank" rel="noopener">📸 Instagram</a>
+            <a class="s-mail" href="mailto:vashpersonal.alm@gmail.com">✉️ Email</a>
           </div>
         </div>
       </div>
@@ -896,25 +1007,22 @@
   const clientText = role => 'Здравствуйте! Ищу персонал: ' + role.toLowerCase();
   const candidateText = role => 'Здравствуйте! Ищу работу: ' + role.toLowerCase();
 
-  // Карточки услуг
+  const EXPRESS_TEXT = 'Здравствуйте! Нужен экспресс-подбор (срочно)';
+  document.getElementById('express-link').href = waLink(EXPRESS_TEXT);
+
+  // Карточки услуг в блоке «Кого мы подбираем»
   const grid = document.getElementById('services-grid');
-  ROLES.forEach(r => {
+  const addCard = (icon, name, desc, href, linkText, cls) => {
     const a = document.createElement('a');
-    a.className = 'service';
-    a.href = waLink(clientText(r.key));
+    a.className = 'service' + (cls ? ' ' + cls : '');
+    a.href = href;
     a.target = '_blank';
     a.rel = 'noopener';
-    a.innerHTML = '<span class="service-icon">' + r.icon + '</span><h3>' + r.key + '</h3><p>' + r.desc + '</p><span class="service-link">Оставить заявку →</span>';
+    a.innerHTML = '<span class="service-icon">' + icon + '</span><h3>' + name + '</h3><p>' + desc + '</p><span class="service-link">' + linkText + '</span>';
     grid.appendChild(a);
-  });
-  const express = document.createElement('a');
-  express.className = 'service express';
-  express.href = waLink('Здравствуйте! Нужен экспресс-подбор (срочно)');
-  express.target = '_blank';
-  express.rel = 'noopener';
-  express.innerHTML = '<span class="service-icon">⚡</span><h3>Экспресс-персонал</h3><p>Срочный подбор за 1–2 дня и разовые выходы</p><span class="service-link">Срочная заявка →</span>';
-  grid.appendChild(express);
-  document.getElementById('express-link').href = express.href;
+  };
+  ROLES.forEach(r => addCard(r.icon, r.key, r.desc, waLink(clientText(r.key)), 'Оставить заявку →'));
+  addCard('⚡', 'Экспресс-персонал', 'Срочный подбор за 1–2 дня и разовые выходы', waLink(EXPRESS_TEXT), 'Срочная заявка →', 'express');
 
   // Окно выбора профессии
   const dlg = document.getElementById('picker');
