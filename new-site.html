@@ -572,72 +572,36 @@
   }
   @media (max-width: 760px) { .contacts { grid-template-columns: 1fr; } }
 
-  /* Карточка с цветной рамкой в цветах логотипа */
   .contact-card {
-    border: 2px solid transparent;
-    background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--grad) border-box;
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: 1.5rem;
-    padding: 24px;
-    box-shadow: 0 18px 40px rgba(139,92,246,0.14);
+    padding: 26px;
   }
-  .contact-card h3 { margin: 0 0 14px; font-size: 1.1rem; color: var(--heading); }
-
-  .contact-phone { text-align: center; padding: 4px 0 18px; border-bottom: 1px solid var(--border); margin-bottom: 6px; }
-  .contact-phone .cl { justify-content: center; }
-  .contact-phone-number {
-    display: inline-block;
-    margin: 4px 0 14px;
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1.6rem, 5vw, 2.1rem);
-    font-weight: 700;
-    text-decoration: none;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .contact-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .btn-call { background: var(--grad-candidate); color: #fff; box-shadow: 0 8px 20px rgba(59,130,246,0.3); }
-
-  .contact-row { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .contact-card h3 { margin: 0 0 14px; font-size: 1.05rem; color: var(--heading); }
+  .contact-row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .contact-row:last-child { border-bottom: none; }
-  .contact-row .ci {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.15rem;
-    background: var(--grad);
-    box-shadow: 0 6px 14px rgba(139,92,246,0.25);
-  }
-  .cl { display: flex; font-size: 0.75rem; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
-  .contact-row .cv { font-weight: 800; font-size: 1.02rem; color: var(--heading); text-decoration: none; }
+  .contact-row .ci { font-size: 1.2rem; width: 28px; text-align: center; flex-shrink: 0; }
+  .contact-row .cl { font-size: 0.78rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .contact-row .cv { font-weight: 700; color: var(--heading); text-decoration: none; }
   .contact-row a.cv:hover { color: var(--violet); }
 
-  /* Мессенджеры в фирменных цветах */
-  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
   .social-grid a {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 15px 14px;
+    gap: 10px;
+    padding: 14px 16px;
     border-radius: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
     text-decoration: none;
-    font-weight: 800;
-    font-size: 0.95rem;
-    color: #fff;
-    box-shadow: 0 8px 18px rgba(15,23,42,0.12);
-    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--heading);
+    transition: transform 0.2s, border-color 0.2s;
   }
-  .social-grid a:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(15,23,42,0.18); }
-  .social-grid .s-wa { background: var(--whatsapp); }
-  .social-grid .s-tg { background: #229ED9; }
-  .social-grid .s-ig { background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af); }
-  .social-grid .s-mail { background: var(--grad-client); }
+  .social-grid a:hover { transform: translateY(-2px); border-color: var(--violet); }
 
   /* ===== Footer ===== */
   footer {
@@ -945,25 +909,17 @@
       </div>
       <div class="contacts">
         <div class="contact-card">
-          <div class="contact-phone">
-            <div class="cl">Телефон / WhatsApp</div>
-            <a class="contact-phone-number" href="tel:+77072259373">+7 707 225 93 73</a>
-            <div class="contact-actions">
-              <a class="btn btn-call btn-sm" href="tel:+77072259373">📞 Позвонить</a>
-              <a class="btn btn-wa btn-sm" href="https://wa.me/77072259373" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Написать в WhatsApp</a>
-            </div>
-          </div>
+          <div class="contact-row"><span class="ci">📞</span><div><div class="cl">Телефон / WhatsApp</div><a class="cv" href="tel:+77072259373">+7 707 225 93 73</a></div></div>
           <div class="contact-row"><span class="ci">📍</span><div><div class="cl">Офис</div><a class="cv" href="https://2gis.kz/almaty/search/%D0%93%D0%BE%D0%B3%D0%BE%D0%BB%D1%8F%2039%D0%B0" target="_blank" rel="noopener">Алматы, ул. Гоголя 39а, офис 316</a></div></div>
-          <div class="contact-row"><span class="ci">🕘</span><div><div class="cl">Режим работы</div><div class="cv">Пн–Пт, 9:00–18:00</div></div></div>
           <div class="contact-row"><span class="ci">✉️</span><div><div class="cl">Email</div><a class="cv" href="mailto:vashpersonal.alm@gmail.com">vashpersonal.alm@gmail.com</a></div></div>
         </div>
         <div class="contact-card">
           <h3>Мы в мессенджерах</h3>
           <div class="social-grid">
-            <a class="s-wa" href="https://wa.me/77072259373" target="_blank" rel="noopener">💬 WhatsApp</a>
-            <a class="s-tg" href="https://t.me/vashpersonal_alm" target="_blank" rel="noopener">✈️ Telegram</a>
-            <a class="s-ig" href="https://instagram.com/vash.personal.alm" target="_blank" rel="noopener">📸 Instagram</a>
-            <a class="s-mail" href="mailto:vashpersonal.alm@gmail.com">✉️ Email</a>
+            <a href="https://wa.me/77072259373" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a href="https://t.me/vashpersonal_alm" target="_blank" rel="noopener">✈️ Telegram</a>
+            <a href="https://instagram.com/vash.personal.alm" target="_blank" rel="noopener">📸 Instagram</a>
+            <a href="mailto:vashpersonal.alm@gmail.com">✉️ Email</a>
           </div>
         </div>
       </div>
