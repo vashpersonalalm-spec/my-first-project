@@ -6,6 +6,16 @@
 <title>Ваш персонал — агентство домашнего персонала в Алматы</title>
 <meta name="description" content="Подбор нянь, домработниц, поваров, сиделок, водителей, садовников и семейных пар в Алматы. Оплата после выхода сотрудника, гарантия 3 месяца, экспресс-подбор за 1–2 дня.">
 <link rel="icon" href="logo-main.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Ваш персонал">
+<meta property="og:title" content="Ваш персонал — агентство домашнего персонала в Алматы">
+<meta property="og:description" content="Подбор нянь, домработниц, поваров, сиделок, водителей и садовников. Оплата после выхода сотрудника, гарантия 3 месяца.">
+<meta property="og:url" content="https://vashpersonal.kz/">
+<meta property="og:image" content="https://vashpersonal.kz/logo-main.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -333,6 +343,8 @@
   .side-alt { margin-top: 12px; text-align: center; font-size: 0.86rem; color: var(--muted); }
   .side-alt a { color: var(--heading); font-weight: 700; text-decoration-color: var(--border); text-underline-offset: 3px; }
   .side-alt a:hover { color: var(--violet); }
+  .link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--heading); font-weight: 700; cursor: pointer; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+  .link-btn:hover { color: var(--violet); }
 
   .trust-row {
     display: flex;
@@ -725,23 +737,7 @@
       </div>
 
       <div class="split">
-        <div class="side-card candidate fade-in" style="animation-delay:0.15s">
-          <div class="side-top">
-            <div class="side-icon">🙋‍♀️</div>
-            <div>
-              <h2>Ищу работу</h2>
-              <div class="side-tag">Для соискателей</div>
-            </div>
-          </div>
-          <ul class="side-list">
-            <li>Регистрация в базе бесплатная</li>
-            <li>Вакансии в семьях Алматы</li>
-            <li>Комиссия только после первой зарплаты</li>
-          </ul>
-          <button class="btn btn-candidate" data-open-picker="candidate">Устроиться на работу →</button>
-          <div class="side-alt">или позвоните <a href="tel:+77072259373">+7 707 225 93 73</a></div>
-        </div>
-        <div class="side-card client fade-in" style="animation-delay:0.22s">
+        <div class="side-card client fade-in" style="animation-delay:0.15s">
           <div class="side-top">
             <div class="side-icon">🏠</div>
             <div>
@@ -756,6 +752,22 @@
           </ul>
           <button class="btn btn-client" data-open-picker="client">Подобрать персонал →</button>
           <div class="side-alt">или <a href="https://docs.google.com/forms/d/e/1FAIpQLSdwDckP-xsL_9jh3lOQEJao-Swxwzu8Vjlnh79QAu7zszUtGA/viewform" target="_blank" rel="noopener">заполните заявку онлайн</a></div>
+        </div>
+        <div class="side-card candidate fade-in" style="animation-delay:0.22s">
+          <div class="side-top">
+            <div class="side-icon">🙋‍♀️</div>
+            <div>
+              <h2>Ищу работу</h2>
+              <div class="side-tag">Для соискателей</div>
+            </div>
+          </div>
+          <ul class="side-list">
+            <li>Регистрация в базе бесплатная</li>
+            <li>Вакансии в семьях Алматы</li>
+            <li>Комиссия только после первой зарплаты</li>
+          </ul>
+          <button class="btn btn-candidate" data-open-picker="candidate">Устроиться на работу →</button>
+          <div class="side-alt">или <button type="button" class="link-btn" data-open-picker="candidate-form">заполните анкету онлайн</button></div>
         </div>
 
       </div>
@@ -942,7 +954,7 @@
     <button class="dlg-close" aria-label="Закрыть" data-close>×</button>
   </div>
   <div class="role-grid" id="picker-grid"></div>
-  <div class="dlg-note"><svg width="14" height="14" style="color:var(--whatsapp)"><use href="#i-wa"/></svg>Откроется WhatsApp с готовым сообщением</div>
+  <div class="dlg-note"><svg id="picker-note-icon" width="14" height="14" style="color:var(--whatsapp)"><use href="#i-wa"/></svg><span id="picker-note-text">Откроется WhatsApp с готовым сообщением</span></div>
 </dialog>
 
 <script>
@@ -950,17 +962,18 @@
 
   // Единый список профессий: сайт и AI-агент опираются на одни и те же названия
   const ROLES = [
-    { key: 'Няня',              icon: '👶', desc: 'Уход за детьми от рождения до школы, прогулки, развитие' },
+    { key: 'Няня',              icon: '👶', desc: 'Уход за детьми от рождения до школы, прогулки, развитие', form: '1FAIpQLSeuOE8MJ4B429M9mXL5aUtVlcv9YL0WdMN3aUV5JF6IPYFUuw' },
     { key: 'Гувернантка',       icon: '📚', desc: 'Воспитание, обучение, подготовка к школе, языки' },
-    { key: 'Домработница',      icon: '🧺', desc: 'Уборка, стирка, глажка, уход за гардеробом' },
-    { key: 'Повар',             icon: '🍲', desc: 'Домашняя, детская, диетическая кухня, меню на неделю' },
-    { key: 'Сиделка',           icon: '🤲', desc: 'Уход за пожилыми и лежачими, патронаж' },
-    { key: 'Водитель',          icon: '🚗', desc: 'Семейный и персональный водитель, сопровождение детей' },
-    { key: 'Садовник',          icon: '🌿', desc: 'Уход за садом, газоном и участком' },
+    { key: 'Домработница',      icon: '🧺', desc: 'Уборка, стирка, глажка, уход за гардеробом', form: '1FAIpQLSfP7oWvHUcWKwSuiJ6Jrl_aRUrEwl0pAfBXuER9Gp_P2q0nfw' },
+    { key: 'Повар',             icon: '🍲', desc: 'Домашняя, детская, диетическая кухня, меню на неделю', form: '1FAIpQLSf8EvQNOUp8uZ806wbz4mKJoDXLlmaz-F5ti9JlQ4QFHYinsg' },
+    { key: 'Сиделка',           icon: '🤲', desc: 'Уход за пожилыми и лежачими, патронаж', form: '1FAIpQLSf3uxrsC5fJMO5EF4kevVkBfsZo0aRBY2kAZ1bL14qi9wiE6w' },
+    { key: 'Водитель',          icon: '🚗', desc: 'Семейный и персональный водитель, сопровождение детей', form: '1FAIpQLSc-opBKdIyKzXH9nXigf5ZlIUc7g5vK9s_8dv3gdL-lgccUpA' },
+    { key: 'Садовник',          icon: '🌿', desc: 'Уход за садом, газоном и участком', form: '1FAIpQLSelYOp-vHTWiz8edGPpSqRXzG_oW4qiA5FUoi6HrkML5IUrfg' },
     { key: 'Гардеробщица',      icon: '👗', desc: 'Уход за одеждой, деликатная стирка, сезонная смена' },
     { key: 'Семейная пара',     icon: '👫', desc: 'Ведение дома и участка, с проживанием' },
   ];
 
+  const formLink = id => 'https://docs.google.com/forms/d/e/' + id + '/viewform';
   const waLink = text => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
   const clientText = role => 'Здравствуйте! Ищу персонал: ' + role.toLowerCase();
   const candidateText = role => 'Здравствуйте! Ищу работу: ' + role.toLowerCase();
@@ -989,6 +1002,8 @@
     client:    { title: 'Кто вам нужен?', sub: 'Выберите профессию — мы сразу перейдём к сути', text: clientText,
                  extra: { key: 'Срочно / разово', icon: '⚡', text: 'Здравствуйте! Нужен экспресс-подбор (срочно)' },
                  other: 'Здравствуйте! Ищу персонал для дома' },
+    'candidate-form': { title: 'Какая у вас профессия?', sub: 'Выберите специальность — откроется анкета', form: true,
+                 other: 'Здравствуйте! Ищу работу' },
     candidate: { title: 'Какую работу ищете?', sub: 'Выберите специальность — пришлём анкету', text: candidateText,
                  other: 'Здравствуйте! Ищу работу' },
   };
@@ -998,15 +1013,23 @@
     document.getElementById('picker-title').textContent = cfg.title;
     document.getElementById('picker-sub').textContent = cfg.sub;
     pickerGrid.innerHTML = '';
-    const add = (icon, label, text) => {
+    document.getElementById('picker-note-text').textContent = cfg.form ? 'Анкета откроется в новой вкладке' : 'Откроется WhatsApp с готовым сообщением';
+    document.getElementById('picker-note-icon').style.display = cfg.form ? 'none' : '';
+    const add = (icon, label, text, href) => {
       const a = document.createElement('a');
-      a.href = waLink(text);
+      a.href = href || waLink(text);
       a.target = '_blank';
       a.rel = 'noopener';
       a.innerHTML = '<span>' + icon + '</span>' + label;
       a.addEventListener('click', () => dlg.close());
       pickerGrid.appendChild(a);
     };
+    if (cfg.form) {
+      ROLES.filter(r => r.form).forEach(r => add(r.icon, r.key, '', formLink(r.form)));
+      add('💬', 'Другая (через WhatsApp)', cfg.other);
+      dlg.showModal();
+      return;
+    }
     ROLES.forEach(r => add(r.icon, r.key, cfg.text(r.key)));
     if (cfg.extra) add(cfg.extra.icon, cfg.extra.key, cfg.extra.text);
     add('💬', 'Другое', cfg.other);
