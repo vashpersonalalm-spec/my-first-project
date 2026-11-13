@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6H3CFQJ4GB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6H3CFQJ4GB');
+</script>
+	
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ваш персонал — агентство домашнего персонала в Алматы</title>
-<meta name="description" content="Подбор нянь, домработниц, поваров, сиделок, водителей, садовников и семейных пар в Алматы. Оплата после выхода сотрудника, гарантия 3 месяца, экспресс-подбор за 1–2 дня.">
+<meta name="description" content="Подбор нянь, домработниц, поваров, сиделок, водителей, садовников и семейных пар в Алматы. Оплата после выхода сотрудника, гарантия замены 3 месяца. Сроки подбора согласовываются индивидуально.">
 <link rel="icon" href="logo-main.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
@@ -54,7 +64,8 @@
   img { max-width: 100%; }
 
   .wrap {
-    max-width: 1120px;
+    max-width: 1600px;
+    width: 90%;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -68,6 +79,10 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 700px) {
+    .wrap, .header-inner { width: 100%; }
   }
 
   /* ===== Buttons ===== */
@@ -113,7 +128,8 @@
     justify-content: space-between;
     gap: 16px;
     padding: 12px 20px;
-    max-width: 1120px;
+    max-width: 1600px;
+    width: 90%;
     margin: 0 auto;
   }
 
@@ -227,7 +243,8 @@
     display: flex;
     align-items: center;
     gap: 18px;
-    max-width: 900px;
+    max-width: 1380px;
+    width: 100%;
     margin: 0 auto 18px;
     padding: 12px 20px;
     background: var(--surface);
@@ -270,7 +287,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    max-width: 900px;
+    max-width: 1380px;
+    width: 100%;
     margin: 0 auto;
   }
   @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
@@ -395,34 +413,6 @@
   .service h3 { margin: 0; font-size: 1.02rem; color: var(--heading); }
   .service p { margin: 0; font-size: 0.85rem; color: var(--muted); }
   .service .service-link { margin-top: auto; padding-top: 8px; font-size: 0.82rem; font-weight: 700; color: var(--violet); }
-  .service.express { background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(16,185,129,0.10)); border-color: rgba(16,185,129,0.4); }
-
-  /* ===== Express banner ===== */
-  .express-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 28px 30px;
-    border-radius: 1.5rem;
-    background: var(--heading);
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-  }
-  .express-banner::after {
-    content: "";
-    position: absolute;
-    right: -80px; top: -80px;
-    width: 260px; height: 260px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(16,185,129,0.45), transparent 70%);
-    pointer-events: none;
-  }
-  .express-banner h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; margin: 0 0 4px; }
-  .express-banner p { margin: 0; color: #cbd5e1; font-size: 0.92rem; max-width: 520px; }
-  .express-banner .btn { position: relative; z-index: 1; }
 
   /* ===== Tabs (shared) ===== */
   .tabs {
@@ -773,7 +763,6 @@
       </div>
 
       <div class="trust-row fade-in" style="animation-delay:0.3s">
-        <span>⚡ Экспресс-подбор за 1–2 дня</span>
         <span>🛡️ Проверка документов и рекомендаций</span>
         <span>🤝 Знакомство через агентство</span>
       </div>
@@ -788,19 +777,6 @@
         <p class="section-sub">Нажмите на профессию — откроется WhatsApp с готовой заявкой</p>
       </div>
       <div class="services" id="services-grid"></div>
-    </div>
-  </section>
-
-  <!-- ===== Express ===== -->
-  <section style="padding-bottom:0">
-    <div class="wrap">
-      <div class="express-banner">
-        <div>
-          <h3>⚡ Нужно срочно?</h3>
-          <p>Экспресс-подбор: готовые анкеты кандидатов за 1–2 дня, а иногда — в день обращения. Подходит и для разовых выходов.</p>
-        </div>
-        <a class="btn btn-wa" id="express-link" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Срочная заявка</a>
-      </div>
     </div>
   </section>
 
@@ -887,7 +863,7 @@
       <div class="tab-panel active" data-tabs="faq" data-panel="client">
         <div class="faq-list">
           <div class="faq-item"><button class="faq-question">Сколько стоят ваши услуги?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>80% от одного месячного оклада выбранного сотрудника. Предоплаты нет — оплата в течение 3 рабочих дней после того, как сотрудник фактически вышел на работу.</p></div></div></div>
-          <div class="faq-item"><button class="faq-question">Сколько длится подбор?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Зависит от требований вакансии и наличия кандидатов. По срочным заявкам работает экспресс-подбор: готовые анкеты за 1–2 дня, иногда в день обращения.</p></div></div></div>
+          <div class="faq-item"><button class="faq-question">Сколько длится подбор?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Срок подбора зависит от требований заказчика, графика работы, местоположения и наличия подходящих кандидатов. Мы проводим предварительный отбор, собеседования, проверяем документы и рекомендации. Сроки обсуждаются индивидуально при оформлении заявки.</p></div></div></div>
           <div class="faq-item"><button class="faq-question">Какая гарантия?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>3 месяца с первого выхода сотрудника. За это время можно до 2 раз бесплатно заменить сотрудника, если он ушёл по своей инициативе или не соответствует требованиям, указанным в заявке. Каждую замену подбираем до 14 рабочих дней. Гарантия — это бесплатная замена, а не возврат денег.</p></div></div></div>
           <div class="faq-item"><button class="faq-question">Когда замена бесплатная, а когда нет?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Бесплатная замена положена, если сотрудник ушёл сам или не подошёл по требованиям, которые вы указали в заявке. Замены нет, если причина на вашей стороне: вы изменили оплату, график или обязанности без согласия сотрудника, задерживали оплату его труда, были грубы или выдвигали незаконные требования, либо отказались от кандидата по причине, не связанной с заявкой. Тогда новый подбор — отдельная услуга.</p></div></div></div>
           <div class="faq-item"><button class="faq-question">Что, если я откажусь от кандидата?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Если вы отказались до первого выхода сотрудника на работу, комиссию вы не платите. Если после выхода — подбор считается выполненным: комиссия оплачивается, деньги не возвращаются, а неиспользованное право на замену прекращается.</p></div></div></div>
@@ -899,7 +875,6 @@
           <div class="faq-item"><button class="faq-question">Можно сразу получить контакты кандидата?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Нет — мы присылаем анкеты кандидатов, а первое знакомство организуем через агентство. Так мы защищаем и вас, и сотрудника.</p></div></div></div>
           <div class="faq-item"><button class="faq-question">Нужна сиделка для тяжелобольного, а уход может быть недолгим?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Понимаем, что в такой ситуации никто не знает, сколько продлится уход. Для сиделок к тяжелобольным и для ухода на короткий срок условия оплаты мы рассматриваем индивидуально. Напишите нам, и менеджер предложит удобный вариант.</p></div></div></div>
           <div class="faq-item"><button class="faq-question">Подбираете персонал с проживанием?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Да. Подбираем сотрудников с проживанием и без, на полный и частичный график, а также на вахту.</p></div></div></div>
-          <div class="faq-item"><button class="faq-question">Можно заказать разовый выход?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Да — например, няню на день, уборку после ремонта или разовый выход садовника. Напишите нам с пометкой «срочно».</p></div></div></div>
           <div class="faq-item"><button class="faq-question">Чем агентство лучше поиска по объявлениям?<span class="chevron"><svg><use href="#i-chev"/></svg></span></button><div class="faq-answer"><div><p>Мы берём на себя отбор, собеседования, проверку документов и рекомендаций, организацию знакомства — и даём гарантию. При самостоятельном поиске всё это ложится на вас.</p></div></div></div>
         </div>
       </div>
@@ -984,9 +959,6 @@
   const clientText = role => 'Здравствуйте! Ищу персонал: ' + role.toLowerCase();
   const candidateText = role => 'Здравствуйте! Ищу работу: ' + role.toLowerCase();
 
-  const EXPRESS_TEXT = 'Здравствуйте! Нужен экспресс-подбор (срочно)';
-  document.getElementById('express-link').href = waLink(EXPRESS_TEXT);
-
   // Карточки услуг в блоке «Кого мы подбираем»
   const grid = document.getElementById('services-grid');
   const addCard = (icon, name, desc, href, linkText, cls) => {
@@ -999,14 +971,12 @@
     grid.appendChild(a);
   };
   ROLES.forEach(r => addCard(r.icon, r.key, r.desc, waLink(clientText(r.key)), 'Оставить заявку →'));
-  addCard('⚡', 'Экспресс-персонал', 'Срочный подбор за 1–2 дня и разовые выходы', waLink(EXPRESS_TEXT), 'Срочная заявка →', 'express');
 
   // Окно выбора профессии
   const dlg = document.getElementById('picker');
   const pickerGrid = document.getElementById('picker-grid');
   const PICKER = {
     client:    { title: 'Кто вам нужен?', sub: 'Выберите профессию — мы сразу перейдём к сути', text: clientText,
-                 extra: { key: 'Срочно / разово', icon: '⚡', text: 'Здравствуйте! Нужен экспресс-подбор (срочно)' },
                  other: 'Здравствуйте! Ищу персонал для дома' },
     'candidate-form': { title: 'Какая у вас профессия?', sub: 'Выберите специальность — откроется анкета', form: true,
                  other: 'Здравствуйте! Ищу работу' },
@@ -1037,7 +1007,6 @@
       return;
     }
     ROLES.forEach(r => add(r.icon, r.key, cfg.text(r.key)));
-    if (cfg.extra) add(cfg.extra.icon, cfg.extra.key, cfg.extra.text);
     add('💬', 'Другое', cfg.other);
     dlg.showModal();
   }
@@ -1064,5 +1033,24 @@
     btn.addEventListener('click', () => btn.closest('.faq-item').classList.toggle('open')));
 </script>
 
+<!-- Отдельный учёт WhatsApp: заказчики и соискатели -->
+<script>
+document.addEventListener('click', function(event) {
+  const link = event.target.closest('a[href*="wa.me/"]');
+  if (!link || typeof gtag !== 'function') return;
+
+  const url = new URL(link.href);
+  const message = url.searchParams.get('text') || '';
+
+  if (message.includes('Ищу персонал')) {
+    gtag('event', 'whatsapp_client_click');
+  } else if (message.includes('Ищу работу')) {
+    gtag('event', 'whatsapp_candidate_click');
+  }
+}, true);
+</script>
+
 </body>
 </html>
+
+
